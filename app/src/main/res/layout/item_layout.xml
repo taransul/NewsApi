@@ -6,9 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="8dp"
-    android:layout_marginTop="16dp"
-    android:background="@color/show">
-
+    android:layout_marginTop="8dp"
+    android:background="@drawable/layout_bg">
 
     <ImageView
         android:id="@+id/headImage"
@@ -34,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="Author"
         app:layout_constraintEnd_toStartOf="@+id/checkBox"
@@ -49,9 +48,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/layout_bg_text"
+        android:gravity="center"
         android:text="Title"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -84,20 +85,23 @@
         android:layout_below="@+id/descriptionTextView"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="4dp"
         android:text="Date"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionTextView" />
 
     <CheckBox
         android:id="@+id/checkBox"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="27dp"
+        android:layout_height="29dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
         android:button="@drawable/save_check_selector"
         android:theme="@style/HeartStyle"
         app:layout_constraintEnd_toEndOf="@+id/headImage"

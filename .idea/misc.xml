@@ -6,10 +6,12 @@
         <entry key="..\:/Users/legion/Documents/AndroidStudio/NewsApi/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/Users/legion/Documents/AndroidStudio/NewsApi/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.2703125" />
         <entry key="..\:/Users/legion/Documents/AndroidStudio/NewsApi/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/legion/Documents/AndroidStudio/NewsApi/app/src/main/res/drawable/layout_bg.xml" value="0.2703125" />
+        <entry key="..\:/Users/legion/Documents/AndroidStudio/NewsApi/app/src/main/res/drawable/layout_bg_text.xml" value="0.2703125" />
         <entry key="..\:/Users/legion/Documents/AndroidStudio/NewsApi/app/src/main/res/drawable/save_check_selector.xml" value="0.2490740740740741" />
         <entry key="..\:/Users/legion/Documents/AndroidStudio/NewsApi/app/src/main/res/layout/fragment_news.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/legion/Documents/AndroidStudio/NewsApi/app/src/main/res/layout/fragment_saved.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/legion/Documents/AndroidStudio/NewsApi/app/src/main/res/layout/item_layout.xml" value="0.4" />
+        <entry key="..\:/Users/legion/Documents/AndroidStudio/NewsApi/app/src/main/res/layout/item_layout.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/legion/Documents/AndroidStudio/NewsApi/app/src/main/res/layout/main_activity.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/legion/Documents/AndroidStudio/NewsApi/app/src/main/res/layout/main_fragment.xml" value="0.25416666666666665" />
       </map>
