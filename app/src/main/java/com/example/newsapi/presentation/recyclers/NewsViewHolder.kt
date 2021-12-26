@@ -1,6 +1,5 @@
-package com.example.newsapi.presentation.recyclers.saved
+package com.example.newsapi.presentation.recyclers
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,17 +11,16 @@ import com.bumptech.glide.Glide
 import com.example.newsapi.R
 import com.example.newsapi.databinding.ItemLayoutBinding
 import com.example.newsapi.presentation.ParseDate
-import com.example.newsapi.presentation.recyclers.news.OnNewsClickListener
 
-class NewsSavedViewHolder(
+class NewsViewHolder(
     itemView: View,
-    private val itemClickListener: OnNewsClickListener
+    private val itemClickListener: OnNewsClickListener,
 ) : RecyclerView.ViewHolder(itemView) {
     private val binding: ItemLayoutBinding by viewBinding()
 
     companion object {
-        fun fromParent2(parent: ViewGroup, itemClickListener: OnNewsClickListener) =
-            NewsSavedViewHolder(
+        fun fromParent(parent: ViewGroup, itemClickListener: OnNewsClickListener) =
+            NewsViewHolder(
                 LayoutInflater
                     .from(parent.context)
                     .inflate(R.layout.item_layout, parent, false),
@@ -35,29 +33,25 @@ class NewsSavedViewHolder(
     private val descriptionTextView: TextView by lazy { binding.descriptionTextView }
     private val publishedAtTextView: TextView by lazy { binding.publishedAtTextView }
 
-    private val headImage by lazy { binding.headImage }
     private val iconCheckBox: CheckBox by lazy { binding.checkBox }
     private val itemContainer by lazy { binding.itemContainer }
+    private val headImage by lazy { binding.headImage }
 
-    fun bindView2(item: News) {
+    fun bindView(item: News) {
         authorTextView.text = item.author
         titleTextView.text = item.title
         descriptionTextView.text = item.description
         publishedAtTextView.text = ParseDate.parseDate(item.publishedAt)
-
         loadImageByUrl(item.previewUrl)
 
-        iconCheckBox.isChecked = true
+        iconCheckBox.isChecked = item.isChecked
 
         itemContainer.setOnClickListener {
             itemClickListener.onItemClickListener(item)
-
-            Log.e("my", "itemSave ++++++ ${item.articleUrl}")
         }
 
         iconCheckBox.setOnClickListener {
-            itemClickListener.onIconClickListener(absoluteAdapterPosition, iconCheckBox.isChecked)
-            Log.e("my", "itemSave ++++++ ${iconCheckBox.isChecked}")
+            itemClickListener.onIconClickListener(absoluteAdapterPosition)
         }
     }
 

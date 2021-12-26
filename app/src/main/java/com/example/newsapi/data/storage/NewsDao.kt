@@ -13,6 +13,6 @@ interface NewsDao {
     @Insert
     fun insertUser(news: NewsEntity)
 
-    @Query("DELETE FROM news2")
-    fun deleteUser()
+    @Query("DELETE FROM news2 WHERE title = :title")
+    fun deleteUser(title: String?)
 }

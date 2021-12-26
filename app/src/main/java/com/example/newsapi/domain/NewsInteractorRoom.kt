@@ -1,11 +1,11 @@
 package com.example.newsapi.domain
 
-import com.example.newsapi.presentation.recyclers.saved.News
+import com.example.newsapi.presentation.recyclers.News
 
 interface NewsInteractorRoom {
-    suspend fun getNews(): List<News>
+    suspend fun getSavedNews(): List<News>
 
-    suspend fun insertNews(vararg arrayOfNews: News)
+    suspend fun insertSavedNews(vararg arrayOfNews: News)
 
-    suspend fun deleteNewsFun (vararg arrayOfNews: News)
+    suspend fun deleteOneSavedNews(newsTitle: String?)
 }

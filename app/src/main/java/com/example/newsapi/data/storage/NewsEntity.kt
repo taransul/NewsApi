@@ -2,7 +2,6 @@ package com.example.newsapi.data.storage
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "news2")
@@ -18,7 +17,7 @@ data class NewsEntity(
     @ColumnInfo(name = "previewUrl")
     val previewUrl: String?,
     @ColumnInfo(name = "publishedAt")
-    val publishedAt: String?
+    val publishedAt: String?,
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

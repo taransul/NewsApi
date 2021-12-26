@@ -6,19 +6,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapi.domain.NewsInteractor
 import com.example.newsapi.domain.NewsInteractorRoom
-import com.example.newsapi.network.dto.Article
-import com.example.newsapi.network.dto.NewsResponse
-import com.example.newsapi.presentation.recyclers.saved.News
+import com.example.newsapi.presentation.recyclers.News
 import kotlinx.coroutines.launch
 
 class NewsFragmentViewModel(
-    private val interactor: NewsInteractor,
-    private val newsInteractorRoom: NewsInteractorRoom
+    private val newsInteractorRoom: NewsInteractorRoom,
+    private val article: NewsInteractor,
 ) : ViewModel() {
 
-    private val _news = MutableLiveData<NewsResponse>()
-    val news: LiveData<NewsResponse> get() = _news
-
+    private val _newsNetwork = MutableLiveData<List<News>>()
+    val newsNetwork: LiveData<List<News>> get() = _newsNetwork
 
     private val _newsSaved = MutableLiveData<List<News>>()
     val newsSaved: LiveData<List<News>> get() = _newsSaved
@@ -29,55 +26,44 @@ class NewsFragmentViewModel(
 
     private fun loadNews() {
         viewModelScope.launch {
-            _news.value = interactor.getNews()
-            _newsSaved.value = newsInteractorRoom.getNews()
+            _newsSaved.value = newsInteractorRoom.getSavedNews()
+            _newsNetwork.value = article.getNews()
         }
     }
 
-    fun onNewsItemClicked(position: Int, activated: Boolean) {
-
-        val item = _news.value?.articles?.get(position) ?: return
-
-        val list = _news.value?.articles?.toMutableList() ?: return
+    fun onNewsItemClicked(position: Int) {
+        val item = _newsNetwork.value?.get(position) ?: return
+        val list = _newsNetwork.value?.toMutableList() ?: return
 
         list[position] = item.copy(isChecked = !item.isChecked)
-
-        _news.value = NewsResponse("ok", 0, list)
+        _newsNetwork.value = list
 
         if (!item.isChecked) {
             insertNews(list[position])
         } else if (item.isChecked) {
-            deleteNews(list[position])
+            deleteNews(list[position].title)
         }
     }
 
-    private fun insertNews(news: Article) {
+    private fun insertNews(news: News) {
         viewModelScope.launch {
-            newsInteractorRoom.insertNews(
+            newsInteractorRoom.insertSavedNews(
                 News(
                     news.author,
                     news.title,
                     news.description,
                     news.articleUrl,
                     news.previewUrl,
-                    news.publishedAt
+                    news.publishedAt,
+                    news.isChecked
                 )
             )
         }
     }
 
-    private fun deleteNews(news: Article) {
+    private fun deleteNews(news: String?) {
         viewModelScope.launch {
-            newsInteractorRoom.deleteNewsFun(
-                News(
-                    news.author,
-                    news.title,
-                    news.description,
-                    news.articleUrl,
-                    news.previewUrl,
-                    news.publishedAt
-                )
-            )
+            newsInteractorRoom.deleteOneSavedNews(news)
         }
     }
 }

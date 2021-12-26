@@ -14,7 +14,7 @@ interface NewsApi {
         @Query("sortBy") sortBy: String,
         @Query("page") pageNumber: Int = 1,
         @Query("sources") sources: String = "",
-        @Query("pageSize") pageSize: Int = 30,
+        @Query("pageSize") pageSize: Int = 100,
         @Query("apiKey") apiKey: String = RetrofitClient.BASE_API_KEY
     ): NewsResponse
 }

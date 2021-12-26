@@ -1,7 +1,8 @@
 package com.example.newsapi.data
 
 import com.example.newsapi.data.storage.NewsEntity
-import com.example.newsapi.presentation.recyclers.saved.News
+import com.example.newsapi.network.dto.Article
+import com.example.newsapi.presentation.recyclers.News
 
 fun NewsEntity.toUser() =
     News(
@@ -11,8 +12,8 @@ fun NewsEntity.toUser() =
         articleUrl = articleUrl,
         previewUrl = previewUrl,
         publishedAt = publishedAt,
+        isChecked = true
     )
-
 
 fun News.toUserEntity() =
     NewsEntity(
@@ -22,4 +23,16 @@ fun News.toUserEntity() =
         articleUrl = articleUrl,
         previewUrl = previewUrl,
         publishedAt = publishedAt
+    )
+
+fun Article.toNews() =
+
+    News(
+        author = author,
+        title = title,
+        description = description,
+        articleUrl = articleUrl,
+        previewUrl = previewUrl,
+        publishedAt = publishedAt,
+        isChecked = false
     )

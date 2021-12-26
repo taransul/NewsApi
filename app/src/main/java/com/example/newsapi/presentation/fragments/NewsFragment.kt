@@ -1,38 +1,35 @@
 package com.example.newsapi.presentation.fragments
 
-import android.widget.Toast
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.newsapi.R
 import com.example.newsapi.databinding.FragmentNewsBinding
-import com.example.newsapi.network.dto.Article
 import com.example.newsapi.presentation.NewsFragmentViewModel
-import com.example.newsapi.presentation.recyclers.news.NewsAdapter
-import com.example.newsapi.presentation.recyclers.news.OnNewsClickListener
+import com.example.newsapi.presentation.recyclers.News
+import com.example.newsapi.presentation.recyclers.NewsAdapter
+import com.example.newsapi.presentation.recyclers.OnNewsClickListener
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class NewsFragment : Fragment(R.layout.fragment_news) {
 
     private val adapter by lazy { NewsAdapter(newsClickListener) }
-    private val viewModel: NewsFragmentViewModel by viewModel()
     private val binding: FragmentNewsBinding by viewBinding(FragmentNewsBinding::bind)
+    private val viewModel: NewsFragmentViewModel by viewModel()
 
     private val newsClickListener: OnNewsClickListener = object : OnNewsClickListener {
 
-        override fun onIconClickListener(position: Int, activated: Boolean) {
-            viewModel.onNewsItemClicked(position, activated)
+        override fun onIconClickListener(position: Int) {
+            viewModel.onNewsItemClicked(position)
         }
 
-        override fun <T> onItemClickListener(news: T) {
-            news as Article
-            Toast.makeText(
-                context,
-                news.title,
-                Toast.LENGTH_LONG
-            )
-                .show()
+        override fun onItemClickListener(news: News) {
+            webOpen(news.articleUrl)
         }
     }
 
@@ -40,7 +37,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         super.onStart()
         initRecycler()
 
-        viewModel.news.observe(viewLifecycleOwner) { news ->
+        viewModel.newsNetwork.observe(viewLifecycleOwner) { news ->
             adapter.submitList(news)
         }
     }
@@ -55,5 +52,10 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         binding.floatingActionButton.setOnClickListener {
             findNavController().navigate(NewsFragmentDirections.actionMainFragmentToSavedFragment())
         }
+    }
+
+    private fun webOpen(web: String?) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(web))
+        ContextCompat.startActivity(requireContext(), intent, Bundle())
     }
 }
