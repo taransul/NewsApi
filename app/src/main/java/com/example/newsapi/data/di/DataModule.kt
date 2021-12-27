@@ -9,7 +9,7 @@ val dataModule = module {
         Room.databaseBuilder(
             get(),
             AppDatabase::class.java,
-            "news2"
+            "news3"
         ).build()
     }
 
