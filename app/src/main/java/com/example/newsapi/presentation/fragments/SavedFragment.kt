@@ -1,9 +1,5 @@
 package com.example.newsapi.presentation.fragments
 
-import android.content.Intent
-import android.net.Uri
-import android.os.Bundle
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -13,6 +9,7 @@ import com.example.newsapi.presentation.NewsFragmentViewModel
 import com.example.newsapi.presentation.recyclers.News
 import com.example.newsapi.presentation.recyclers.NewsAdapter
 import com.example.newsapi.presentation.recyclers.OnNewsClickListener
+import com.example.newsapi.utils.webOpen
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SavedFragment : Fragment(R.layout.fragment_saved) {
@@ -43,10 +40,5 @@ class SavedFragment : Fragment(R.layout.fragment_saved) {
     private fun initRecycler() {
         binding.recycleListSave.adapter = adapter
         binding.recycleListSave.layoutManager = LinearLayoutManager(context)
-    }
-
-    private fun webOpen(web: String?) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(web))
-        ContextCompat.startActivity(requireContext(), intent, Bundle())
     }
 }

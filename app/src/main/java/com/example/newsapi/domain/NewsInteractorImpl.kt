@@ -9,27 +9,26 @@ class NewsInteractorImpl(
 ) : NewsInteractor {
     override suspend fun getNews(): List<News> {
         val savedNews = interactorRoom.getSavedNews()
-        val articles = interactor.getNewsInteractor()
+        val articles = interactor.getNewsNetwork()
 
-        val list1: List<News> = savedNews.map { dataBaseNews ->
+        val savedNewsList: List<News> = savedNews.map { dataBaseNews ->
             dataBaseNews
         }
 
-        val list2: List<News> = articles.map { networkNews ->
+        val articlesList: List<News> = articles.map { networkNews ->
             networkNews.toNews()
         }
 
-        val list3: MutableList<News> = mutableListOf()
+        val comparisonResultList: MutableList<News> = mutableListOf()
 
-        list2.forEach { item ->
-            val newItem = list1.find { news ->
+        articlesList.forEach { item ->
+            val newItem = savedNewsList.find { news ->
                 item.title == news.title
             }
-            list3.add(
+            comparisonResultList.add(
                 newItem ?: item
             )
-
         }
-        return list3
+        return comparisonResultList
     }
 }

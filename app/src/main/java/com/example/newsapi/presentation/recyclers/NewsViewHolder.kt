@@ -10,7 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.newsapi.R
 import com.example.newsapi.databinding.ItemLayoutBinding
-import com.example.newsapi.presentation.ParseDate
+import com.example.newsapi.utils.ParseDate
 
 class NewsViewHolder(
     itemView: View,

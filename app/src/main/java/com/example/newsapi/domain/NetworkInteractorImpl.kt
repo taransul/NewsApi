@@ -8,7 +8,7 @@ class NetworkInteractorImpl(
     private val newsApi: NewsApi,
 ) : NetworkInteractor {
 
-    override suspend fun getNewsDoNotChange(): NewsResponse {
+    override suspend fun getNews(): NewsResponse {
         return newsApi.getEverything(
             query = "technology",
             fromDate = null,
@@ -18,7 +18,7 @@ class NetworkInteractorImpl(
         )
     }
 
-    override suspend fun getNewsInteractor(): List<Article> {
-        return getNewsDoNotChange().articles
+    override suspend fun getNewsNetwork(): List<Article> {
+        return getNews().articles
     }
 }

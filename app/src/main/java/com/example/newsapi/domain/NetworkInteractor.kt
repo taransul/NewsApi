@@ -4,7 +4,7 @@ import com.example.newsapi.network.dto.Article
 import com.example.newsapi.network.dto.NewsResponse
 
 interface NetworkInteractor {
-    suspend fun getNewsDoNotChange(): NewsResponse
+    suspend fun getNews(): NewsResponse
 
-    suspend fun getNewsInteractor(): List<Article>
+    suspend fun getNewsNetwork(): List<Article>
 }

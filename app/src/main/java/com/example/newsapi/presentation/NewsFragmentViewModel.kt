@@ -38,10 +38,10 @@ class NewsFragmentViewModel(
         list[position] = item.copy(isChecked = !item.isChecked)
         _newsNetwork.value = list
 
-        if (!item.isChecked) {
-            insertNews(list[position])
-        } else if (item.isChecked) {
+        if (item.isChecked) {
             deleteNews(list[position].title)
+        } else if (!item.isChecked) {
+            insertNews(list[position])
         }
     }
 

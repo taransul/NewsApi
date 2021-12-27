@@ -26,13 +26,12 @@ fun News.toUserEntity() =
     )
 
 fun Article.toNews() =
-
     News(
-        author = author,
-        title = title,
-        description = description,
-        articleUrl = articleUrl,
-        previewUrl = previewUrl,
-        publishedAt = publishedAt,
+        author = author ?: "",
+        title = title ?: "",
+        description = description ?: "",
+        articleUrl = articleUrl ?: "",
+        previewUrl = previewUrl ?: "",
+        publishedAt = publishedAt ?: "",
         isChecked = false
     )
