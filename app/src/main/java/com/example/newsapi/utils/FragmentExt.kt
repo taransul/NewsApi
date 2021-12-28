@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 
-fun Fragment.webOpen(web: String?) {
-    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(web))
+fun Fragment.openLink(link: String) {
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
     startActivity(requireContext(), intent, Bundle())
 }

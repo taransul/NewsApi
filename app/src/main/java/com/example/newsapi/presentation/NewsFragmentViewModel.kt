@@ -40,7 +40,7 @@ class NewsFragmentViewModel(
 
         if (item.isChecked) {
             deleteNews(list[position].title)
-        } else if (!item.isChecked) {
+        } else {
             insertNews(list[position])
         }
     }

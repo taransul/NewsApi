@@ -9,7 +9,7 @@ import com.example.newsapi.presentation.NewsFragmentViewModel
 import com.example.newsapi.presentation.recyclers.News
 import com.example.newsapi.presentation.recyclers.NewsAdapter
 import com.example.newsapi.presentation.recyclers.OnNewsClickListener
-import com.example.newsapi.utils.webOpen
+import com.example.newsapi.utils.openLink
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SavedFragment : Fragment(R.layout.fragment_saved) {
@@ -24,7 +24,7 @@ class SavedFragment : Fragment(R.layout.fragment_saved) {
         }
 
         override fun onItemClickListener(news: News) {
-            webOpen(news.articleUrl)
+            openLink(news.articleUrl)
         }
     }
 
