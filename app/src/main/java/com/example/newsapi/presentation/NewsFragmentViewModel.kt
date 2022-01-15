@@ -1,18 +1,24 @@
 package com.example.newsapi.presentation
 
+import android.app.Application
+import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapi.domain.NewsInteractor
 import com.example.newsapi.domain.NewsInteractorRoom
 import com.example.newsapi.presentation.recyclers.News
 import kotlinx.coroutines.launch
 
+const val TEXT_WHEN_DELETED_FROM_SAVED_FRAGMENT = "Новость удалена"
+const val TEXT_WHEN_INSERTED_INTO_SAVED_FRAGMENT = "Новость сохранена"
+
 class NewsFragmentViewModel(
     private val newsInteractorRoom: NewsInteractorRoom,
     private val article: NewsInteractor,
-) : ViewModel() {
+    application: Application,
+) : AndroidViewModel(application) {
 
     private val _newsNetwork = MutableLiveData<List<News>>()
     val newsNetwork: LiveData<List<News>> get() = _newsNetwork
@@ -31,17 +37,37 @@ class NewsFragmentViewModel(
         }
     }
 
-    fun onNewsItemClicked(position: Int) {
+    fun onNewsItemClicked(position: Int, isFragment: Boolean) {
+
+        val listSaved = _newsSaved.value?.toMutableList() ?: return
         val item = _newsNetwork.value?.get(position) ?: return
         val list = _newsNetwork.value?.toMutableList() ?: return
 
-        list[position] = item.copy(isChecked = !item.isChecked)
-        _newsNetwork.value = list
+        if (!isFragment) {
+            list[position] = item.copy(isChecked = !item.isChecked)
+            _newsNetwork.value = list
 
-        if (item.isChecked) {
-            deleteNews(list[position].title)
-        } else {
-            insertNews(list[position])
+            if (item.isChecked) {
+                deleteNews(list[position].title)
+
+                Toast.makeText(getApplication(),
+                    TEXT_WHEN_DELETED_FROM_SAVED_FRAGMENT,
+                    Toast.LENGTH_SHORT).show()
+            } else {
+                insertNews(list[position])
+
+                Toast.makeText(getApplication(),
+                    TEXT_WHEN_INSERTED_INTO_SAVED_FRAGMENT,
+                    Toast.LENGTH_SHORT).show()
+            }
+        } else if (isFragment) {
+            deleteNews(listSaved[position].title)
+
+            Toast.makeText(getApplication(),
+                TEXT_WHEN_DELETED_FROM_SAVED_FRAGMENT,
+                Toast.LENGTH_SHORT).show()
+
+            loadNews()
         }
     }
 

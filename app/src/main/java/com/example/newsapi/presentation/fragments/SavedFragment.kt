@@ -1,6 +1,7 @@
 package com.example.newsapi.presentation.fragments
 
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.newsapi.R
@@ -20,7 +21,7 @@ class SavedFragment : Fragment(R.layout.fragment_saved) {
     private val newsClickListener: OnNewsClickListener = object : OnNewsClickListener {
 
         override fun onIconClickListener(position: Int) {
-            viewModel.onNewsItemClicked(position)
+            viewModel.onNewsItemClicked(position, true)
         }
 
         override fun onItemClickListener(news: News) {
@@ -40,5 +41,12 @@ class SavedFragment : Fragment(R.layout.fragment_saved) {
     private fun initRecycler() {
         binding.recycleListSave.adapter = adapter
         binding.recycleListSave.layoutManager = LinearLayoutManager(context)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.floatingActionBackNewsFragment.setOnClickListener {
+            findNavController().navigate(SavedFragmentDirections.actionSavedFragmentToMainFragment())
+        }
     }
 }

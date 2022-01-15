@@ -22,7 +22,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     private val newsClickListener: OnNewsClickListener = object : OnNewsClickListener {
 
         override fun onIconClickListener(position: Int) {
-            viewModel.onNewsItemClicked(position)
+            viewModel.onNewsItemClicked(position, false)
         }
 
         override fun onItemClickListener(news: News) {
@@ -46,7 +46,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
 
     override fun onResume() {
         super.onResume()
-        binding.floatingActionButton.setOnClickListener {
+        binding.floatingActionToSavedFragment.setOnClickListener {
             findNavController().navigate(NewsFragmentDirections.actionMainFragmentToSavedFragment())
         }
     }

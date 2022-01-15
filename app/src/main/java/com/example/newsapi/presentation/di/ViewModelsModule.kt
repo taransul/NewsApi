@@ -14,7 +14,8 @@ val mainModule = module {
     viewModel {
         NewsFragmentViewModel(
             newsInteractorRoom = get(),
-            article = get()
+            article = get(),
+            application = get()
         )
     }
 
